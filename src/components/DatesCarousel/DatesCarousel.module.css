@@ -1,0 +1,260 @@
+:root {
+  --color-bg: #f5f1e6;
+  --color-card: #f8f1e0;
+  --color-text: #795548;
+  --color-accent: #a1887f;
+  --color-accent-hover: #8d6e63;
+  --color-header: #5d4037;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--color-bg);
+  padding: 40px 20px;
+  font-family: "Open Sans", sans-serif;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.backBtn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: none;
+  border: none;
+  color: var(--color-text);
+  font-size: 16px;
+  font-family: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.header {
+  color: var(--color-header);
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 22px;
+  padding: 0 10px;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.navBtn {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: var(--color-accent);
+  cursor: pointer;
+  padding: 0 5px;
+  transition: transform 0.2s;
+}
+
+.card {
+  width: 100%;
+  max-width: 300px;
+  background: var(--color-card);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(121, 85, 72, 0.1);
+  text-align: center;
+  border: 1px solid #e0d9ca;
+  box-sizing: border-box;
+}
+
+.image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin: 0 0 8px 0;
+  color: var(--color-header);
+  font-size: 18px;
+}
+
+.card p {
+  color: var(--color-text);
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.chooseBtn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.dots {
+  margin-top: 25px;
+  display: flex;
+  gap: 8px;
+}
+
+.dot,
+.dotActive {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #d7ccc8;
+}
+
+.dotActive {
+  background-color: var(--color-accent);
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 10px;
+  }
+
+  .header {
+    font-size: 19px;
+    margin-top: 20px;
+  }
+
+  .navBtn {
+    font-size: 26px;
+    padding: 0;
+  }
+
+  .card {
+    padding: 15px;
+    max-width: 260px;
+  }
+
+  .image {
+    height: 150px;
+  }
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.backBtn {
+  align-self: flex-start;
+  margin-bottom: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.carouselWrapper {
+  width: 100%;
+  max-width: 700px;
+}
+
+.swiperContainer {
+  width: 100%;
+  padding: 30px 0 50px 0;
+}
+
+/* Соседние (неактивные) карточки: уменьшенные, полупрозрачные и в оттенках серого */
+/* Базовый стиль для ВСЕХ карточек (они по умолчанию «засеренные» и уменьшенные) */
+.swiperSlide {
+  width: 300px;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease,
+    filter 0.3s ease;
+  opacity: 0.4;
+  filter: grayscale(80%) brightness(0.7);
+  transform: scale(0.85);
+}
+
+/* Активная (центральная) карточка — убираем всю серость и возвращаем в фокус */
+.swiperSlide.swiper-slide-active {
+  opacity: 1 !important;
+  filter: grayscale(0%) brightness(1) !important;
+  transform: scale(1) !important;
+  z-index: 10;
+}
+
+/* Перебиваем стили для АКТИВНОЙ карточки через стандартный класс Swiper */
+:global(.swiper-slide-active) {
+  opacity: 1 !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  transform: scale(1) !important;
+  z-index: 10 !important;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.chooseBtn {
+  background: #a1887f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.chooseBtn:hover {
+  background: #8d6e63;
+}
