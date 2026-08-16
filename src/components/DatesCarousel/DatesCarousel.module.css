@@ -182,8 +182,6 @@
   padding: 30px 0 50px 0;
 }
 
-/* Соседние (неактивные) карточки: уменьшенные, полупрозрачные и в оттенках серого */
-/* Базовый стиль для ВСЕХ карточек (они по умолчанию «засеренные» и уменьшенные) */
 .swiperSlide {
   width: 300px;
   transition:
@@ -195,7 +193,6 @@
   transform: scale(0.85);
 }
 
-/* Активная (центральная) карточка — убираем всю серость и возвращаем в фокус */
 .swiperSlide.swiper-slide-active {
   opacity: 1 !important;
   filter: grayscale(0%) brightness(1) !important;
@@ -203,7 +200,6 @@
   z-index: 10;
 }
 
-/* Перебиваем стили для АКТИВНОЙ карточки через стандартный класс Swiper */
 :global(.swiper-slide-active) {
   opacity: 1 !important;
   filter: none !important;

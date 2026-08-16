@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import glina from "../../photos/glina.png";
+import sh from "../../photos/sh.png";
+import kino from "../../photos/kino.png";
+import ride from "../../photos/ride.png";
+import padal from "../../photos/padal.png";
+import pirates from "../../audio/pirates.mp3";
 
-// Импортируем стили Swiper
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -14,26 +19,54 @@ import styles from "./DatesCarousel.module.css";
 const DATES_MOCK = [
   {
     id: 1,
-    title: "Уютный вечер с кино",
-    desc: "Закажем любимую еду, завернемся в плед и посмотрим фильм.",
-    image: "https://via.placeholder.com/300x200?text=Movie+Night",
+    title: "Поиграем в падал теннис",
+    desc: "Активно проведем время и помашем ракетками",
+    image: padal,
   },
   {
     id: 2,
-    title: "Прогулка и кофе",
-    desc: "Пройдемся по красивым местам, возьмем горячий кофе и просто поболтаем.",
-    image: "https://via.placeholder.com/300x200?text=Coffee+Walk",
+    title: "Уютно посидим посмотрим фильм",
+    desc: "Закажем любимую еду и посмотрим фильм или начнем смотреть сериал",
+    image: kino,
   },
   {
     id: 3,
-    title: "Ужин при свечах",
-    desc: "Я приготовлю (или закажу) вкусный ужин, зажжем свечи.",
-    image: "https://via.placeholder.com/300x200?text=Romantic+Dinner",
+    title: "Погуляем по Шарташу",
+    desc: "Да, я живу в Екб 25 лет и ниразу там не гулял)",
+    image: sh,
+  },
+  {
+    id: 4,
+    title: "Рванем куда-нибудь за город",
+    desc: "Поедем кайфанем от музыки и погуляем по интересным местам",
+    image: ride,
+  },
+  {
+    id: 5,
+    title: "Сходим на мастер-класс",
+    desc: "Помесим что-нибудь из глины",
+    image: glina,
   },
 ];
 
 export default function DatesCarousel({ onChoose }) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const bgMusic = new Audio(pirates);
+
+    bgMusic.loop = true;
+    bgMusic.volume = 0.1;
+
+    bgMusic.play().catch((err) => {
+      console.log("Автовоспроизведение заблокировано браузером:", err);
+    });
+
+    return () => {
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+    };
+  }, []);
 
   const handleChoose = (title) => {
     if (onChoose) onChoose(title);
@@ -42,7 +75,6 @@ export default function DatesCarousel({ onChoose }) {
 
   return (
     <div className={styles.container}>
-      {/* Кнопка НАЗАД */}
       <button className={styles.backBtn} onClick={() => navigate(-1)}>
         ← Назад
       </button>
@@ -82,7 +114,7 @@ export default function DatesCarousel({ onChoose }) {
                   className={styles.chooseBtn}
                   onClick={() => handleChoose(item.title)}
                 >
-                  Выбрать это!
+                  Выбрать!
                 </button>
               </div>
             </SwiperSlide>

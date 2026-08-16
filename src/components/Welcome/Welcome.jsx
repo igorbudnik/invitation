@@ -1,10 +1,27 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
 import styles from "./Welcome.module.css";
 
 export default function Welcome() {
   const navigate = useNavigate();
   const [coords, setCoords] = useState(null);
+  const [isAccepted, setIsAccepted] = useState(false);
+
+  const handleAccept = () => {
+    setIsAccepted(true);
+
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 1 },
+      colors: ["#e07a5f", "#b5838d", "#f4a261", "#f3c68f", "#e9c46a"],
+    });
+
+    setTimeout(() => {
+      navigate("/dates");
+    }, 2500);
+  };
 
   const moveButton = (e) => {
     e.preventDefault();
@@ -17,14 +34,12 @@ export default function Welcome() {
     const maxX = window.innerWidth - btnWidth - padding;
     const maxY = window.innerHeight - btnHeight - padding;
 
-    // Центр экрана, где расположена кнопка "Принять"
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
-    const safeZoneRadius = 120; // Радиус зоны безопасности вокруг кнопки "Принять"
+    const safeZoneRadius = 120;
 
     let randomTop, randomLeft;
 
-    // Цикл гарантирует, что кнопка НЕ улетит в зону кнопки "Принять"
     do {
       randomTop = Math.max(padding, Math.random() * maxY);
       randomLeft = Math.max(padding, Math.random() * maxX);
@@ -48,21 +63,24 @@ export default function Welcome() {
 
   return (
     <div className={styles.container}>
+      {isAccepted && (
+        <div className={styles.popupMessage}>Фух, так и знал!:)</div>
+      )}
+
       <div className={styles.envelopeWrapper}>
         <div className={styles.envelope}>
           <div className={styles.envelopeTop}></div>
           <div className={styles.paper}>
-            <h2>Особое приглашение</h2>
+            <h2>Особое приглашение!!!</h2>
             <p>
-              Я никуда не пропаду, просто иногда бываю в делах. Но для тебя у
-              меня всегда найдется время. Пойдем на свидание? ❤️
+              Тебя ждет выбор, как провести день. Примешь ли ты это предложение?
             </p>
           </div>
         </div>
       </div>
 
       <div className={styles.buttonsContainer}>
-        <button className={styles.btnAccept} onClick={() => navigate("/dates")}>
+        <button className={styles.btnAccept} onClick={handleAccept}>
           Принять
         </button>
 

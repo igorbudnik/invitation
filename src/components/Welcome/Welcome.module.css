@@ -133,7 +133,6 @@
   background-color: #d0d0d0;
 }
 
-/* Класс активируется при первом клике и запускает плавный полет */
 .flying {
   position: fixed !important;
   margin: 0 !important;
@@ -142,8 +141,6 @@
     top 0.3s ease,
     left 0.3s ease;
 }
-
-/* Адаптивность для мобильных устройств (включая iPhone Pro Max) */
 @media (max-width: 480px) {
   .container {
     padding: 15px;
@@ -178,5 +175,33 @@
     width: 125px;
     height: 42px;
     font-size: 14px;
+  }
+}
+
+.popupMessage {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 16px 32px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(181, 131, 141, 0.3);
+  color: var(--color-text);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  z-index: 9999;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -30%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Welcome from "./components/Welcome/Welcome";
 import DatesCarousel from "./components/DatesCarousel/DatesCarousel";
 import CalendarDate from "./components/CalendarDate/CalendarDate";
@@ -17,7 +17,7 @@ export default function App() {
         minHeight: "100vh",
       }}
     >
-      <BrowserRouter>
+      <Router>
         <Routes>
           <Route path="/" element={<Welcome />} />
 
@@ -33,7 +33,7 @@ export default function App() {
             element={<CalendarDate dateIdea={selectedDateIdea} />}
           />
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }

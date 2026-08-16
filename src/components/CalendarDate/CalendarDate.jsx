@@ -7,6 +7,7 @@ import styles from "./CalendarDate.module.css";
 
 export default function CalendarDate({ dateIdea }) {
   const [date, setDate] = useState(new Date());
+  const [comment, setComment] = useState("");
   const [isSent, setIsSent] = useState(false);
   const navigate = useNavigate();
 
@@ -16,24 +17,31 @@ export default function CalendarDate({ dateIdea }) {
 
   const handleSend = () => {
     if (!date) {
-      alert("Пожалуйста, выбери дату!");
+      alert("Выбери дату!");
       return;
     }
+
     const formattedDate = date.toLocaleDateString("ru-RU");
-    const message = `Привет! ❤️ Я выбрала свидание: "${dateIdea}". Давай встретимся ${formattedDate}. Жду с нетерпением! И я знаю, что ты всегда найдешь для меня время.`;
-    window.location.href = `https://t.me/IpanterB?text=${encodeURIComponent(message)}`;
+
+    let message = `${dateIdea}. Дата встречи ${formattedDate}.`;
+
+    if (comment.trim()) {
+      message += `\n\nДополнения: ${comment}`;
+    }
+
     setIsSent(true);
+
+    setTimeout(() => {
+      window.location.href = `https://t.me/IpanterB?text=${encodeURIComponent(message)}`;
+    }, 2000);
   };
 
   if (isSent) {
     return (
       <div className={styles.container}>
         <div className={styles.successCard}>
-          <h2>Договорились! 🎉</h2>
-          <p>
-            Теперь просто отправь мне это сообщение, и я добавлю дату в свой
-            календарь!
-          </p>
+          <h2>🎉🎉🎉</h2>
+          <p>Супер! Сейчас перенесет в наш чат:)</p>
         </div>
       </div>
     );
@@ -59,8 +67,17 @@ export default function CalendarDate({ dateIdea }) {
             locale={ru}
             inline
             minDate={new Date()}
+            excludeDates={[new Date(2026, 7, 21)]}
           />
         </div>
+
+        <textarea
+          className={styles.commentInput}
+          placeholder="Напиши, чего бы тебе хотелось дополнительно"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          rows="3"
+        />
 
         <button className={styles.submitBtn} onClick={handleSend}>
           Подтвердить дату!
